@@ -43,6 +43,9 @@
                             <th><?php echo $value['fieldname'];?></th>
                         <?php endif;?>
                     <?php endforeach;?>
+
+                    <?php if($show_created_by):?> <th>Diproses oleh</th> <?php endif;?>
+                    <?php if($show_created_date):?> <th>Tgl Proses</th><?php endif;?>
                     <th>Action</th>
                 </thead>
                 <tbody>

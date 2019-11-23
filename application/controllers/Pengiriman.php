@@ -10,7 +10,9 @@ class Pengiriman extends ModelController {
         'parentmenu' => 'Modules',
         'route' => 'pengiriman',
         'access' => 'PENGIRIMAN',
-        'tablename' => 'app_pengiriman',       
+        'tablename' => 'app_pengiriman',
+        'show_created_by'=> true,
+        'show_created_date'=> true,
         'modelfield' => array(
             'id' => array(
                 'type' => 'hidden',
