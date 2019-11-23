@@ -69,6 +69,9 @@ abstract class ModelController extends CI_Controller {
                 $page = $v['view'];
             }
         }
+
+        $params['show_created_by'] = isset($this->modelOptions['show_created_by']) ? true : false;
+        $params['show_created_date'] = isset($this->modelOptions['show_created_date']) ? true : false;
         $this->view->genView($page, $params);
     }
 
@@ -387,7 +390,18 @@ abstract class ModelController extends CI_Controller {
                 $queryColumn = join(',', $columnQuery);
                 $queryColumn = $queryColumn. ",".$table.'.id';
                 $join = '';
-                $sql = "SELECT $queryColumn FROM $table $joinQuery WHERE $table.`is_delete` = 0 AND $where $order";
+
+                if (isset($this->modelOptions['show_created_by'])) {
+                    $queryColumn .= ", sys_user.name as user_created_by";
+                    $joinQuery .= " JOIN sys_user ON sys_user.id = ".$table.".created_by ";
+                }
+
+                if (isset($this->modelOptions['show_created_date'])) {
+                    $queryColumn .=",".$table.".created_date";
+                }
+
+                $sql = "SELECT $queryColumn FROM $table $joinQuery 
+                WHERE $table.`is_delete` = 0 AND $where $order";
                 $allData = $this->db->query($sql)->num_rows();
                 $sql .= " LIMIT $limit OFFSET $offset";
                 $user = $this->db->query($sql);
@@ -402,6 +416,15 @@ abstract class ModelController extends CI_Controller {
                         $fieldname = end($f);
                         array_push($res, $r->$fieldname);
                     }
+
+                    if (isset($this->modelOptions['show_created_by'])) {
+                        array_push($res, $r->user_created_by);
+                    }
+
+                    if (isset($this->modelOptions['show_created_date'])) {
+                        array_push($res, $r->created_date);
+                    }
+
                     array_push($res, $r->id);
                     $data[] = $res;
                     $no++;
