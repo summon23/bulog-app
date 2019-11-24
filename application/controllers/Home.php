@@ -49,16 +49,16 @@ class Home extends CI_Controller {
 
 		$page = 'default/dashboard';
 
-		$totalPenerimaan = $this->db->query('SELECT count(id) as total FROM app_penerimaan')->row();
+		$totalPenerimaan = $this->db->query('SELECT count(id) as total FROM app_penerimaan WHERE is_delete = 0')->row();
 		$params['totalpenerimaan'] = $totalPenerimaan;
 
-		$totalPengiriman = $this->db->query('SELECT count(id) as total FROM app_pengiriman')->row();
+		$totalPengiriman = $this->db->query('SELECT count(id) as total FROM app_pengiriman WHERE is_delete = 0')->row();
 		$params['totalpengiriman'] = $totalPengiriman;
 
-		$totalPengolahan = $this->db->query('SELECT count(id) as total FROM app_pengolahan')->row();
+		$totalPengolahan = $this->db->query('SELECT count(id) as total FROM app_pengolahan WHERE is_delete = 0')->row();
 		$params['totalpengolahan'] = $totalPengolahan;
 
-		$totalSpk = $this->db->query('SELECT count(id) as total FROM app_spk')->row();
+		$totalSpk = $this->db->query('SELECT count(id) as total FROM app_spk WHERE is_delete = 0')->row();
 		$params['totalspk'] = $totalSpk;
 		
 		return $this->view->genView($page, $params);

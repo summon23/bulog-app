@@ -67,6 +67,14 @@ class Report extends CI_Controller {
                     <td>".$totalSpk[$i]->tujuan."</td>
                     <td>".$totalSpk[$i]->jumlah."</td>
                 ";
+            } else {
+                $contentTable .= "
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            ";
             }
 
             // penerimaan
@@ -82,6 +90,18 @@ class Report extends CI_Controller {
                     <td>".$totalPenerimaan[$i]->netto."</td>
                     <td>".$totalPenerimaan[$i]->pengirim."</td>
                 ";
+            } else {
+                $contentTable .= "
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                ";
             }
 
             // pengolahan
@@ -92,6 +112,14 @@ class Report extends CI_Controller {
                     <td>".$totalPengolahan[$i]->bruto."</td>
                     <td>".$totalPengolahan[$i]->netto."</td>
                     <td>".$totalPengolahan[$i]->jumlah_terpakai."</td>
+                ";
+            } else {
+                $contentTable .= "
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 ";
             }
             
@@ -106,6 +134,17 @@ class Report extends CI_Controller {
                     <td>".$totalPengiriman[$i]->netto."</td>
                     <td>".$totalPengiriman[$i]->penerima."</td>
                     <td>".$totalPengiriman[$i]->keterangan."</td>
+                ";
+            } else {
+                $contentTable .= "
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 ";
             }
 

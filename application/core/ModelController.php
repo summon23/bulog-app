@@ -375,13 +375,33 @@ abstract class ModelController extends CI_Controller {
                     array_push($condition, $ref['table_name'].'.'.$source.' like "%'.$key.'%" ');
                 }
             }
+
+            if (isset($this->modelOptions['show_created_by'])) {
+                array_push($condition, 'sys_user.name like "%'.$key.'%" ');
+            }
+
+            if (isset($this->modelOptions['show_created_date'])) {
+                
+            }
+
             $where = ' ('.join(" OR ", $condition).') ';
         }
 
         // fix this
         if (array_key_exists('sortcolumn', $query)) {
             if ($query['sortcolumn'] != 0) {
-                $order = ' ORDER BY '.$column[$query['sortcolumn'] -1].' '.$query['sortdir'];            
+                if (isset($column[$query['sortcolumn'] -1])) {
+                    $order = ' ORDER BY '.$column[$query['sortcolumn'] -1].' '.$query['sortdir'];
+                }
+
+                if (isset($this->modelOptions['show_created_by'])) {
+                    $order = ' ORDER BY sys_user.name '.$query['sortdir'];
+                }
+    
+                if (isset($this->modelOptions['show_created_date'])) {
+                    $order = ' ORDER BY '.$table.'.created_date '.$query['sortdir'];
+                }
+            
             } else {
                 $order = " ORDER BY $table.id DESC";
             }
