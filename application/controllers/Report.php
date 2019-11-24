@@ -34,10 +34,23 @@ class Report extends CI_Controller {
         $startDate = date('Y-m-d', strtotime($startDate));
         $endDate = date('Y-m-d', strtotime($endDate));
 
-        $totalSpk = $this->db->query('SELECT * FROM app_spk WHERE DATE(created_date) BETWEEN "'.$startDate.'" AND "'.$endDate.'" ')->result();
-        $totalPenerimaan = $this->db->query('SELECT * FROM app_penerimaan WHERE DATE(created_date) BETWEEN "'.$startDate.'" AND "'.$endDate.'" ')->result();
-		$totalPengiriman = $this->db->query('SELECT * FROM app_pengiriman WHERE DATE(created_date) BETWEEN "'.$startDate.'" AND "'.$endDate.'" ')->result();
-		$totalPengolahan = $this->db->query('SELECT * FROM app_pengolahan WHERE DATE(created_date) BETWEEN "'.$startDate.'" AND "'.$endDate.'" ')->result();
+        $totalSpk = $this->db->query('SELECT * FROM app_spk WHERE DATE(created_date) BETWEEN "'.$startDate.'" AND "'.$endDate.'" ')->result();     
+        $totalPenerimaan = $this->db->query('SELECT app_penerimaan.*, m.name as komoditas_name, mm.name as kemasan_name
+            FROM app_penerimaan 
+            JOIN master_komoditi m ON m.id = app_penerimaan.komoditas_id
+            JOIN master_kemasan mm ON mm.id = app_penerimaan.kemasan_id
+            WHERE DATE(app_penerimaan.created_date) BETWEEN "'.$startDate.'" AND "'.$endDate.'" ')->result();
+
+        
+		$totalPengiriman = $this->db->query('SELECT app_pengiriman.*, m.name as kemasan_name
+            FROM app_pengiriman             
+            JOIN master_kemasan m ON m.id = app_pengiriman.kemasan_id
+            WHERE DATE(app_pengiriman.created_date) BETWEEN "'.$startDate.'" AND "'.$endDate.'" ')->result();
+
+
+		$totalPengolahan = $this->db->query('SELECT * 
+            FROM app_pengolahan 
+            WHERE DATE(created_date) BETWEEN "'.$startDate.'" AND "'.$endDate.'" ')->result();
             
         // Start Generete Excel File
         header("Content-type: application/vnd-ms-excel");
@@ -82,9 +95,9 @@ class Report extends CI_Controller {
                 $contentTable .= "
                     <td>".$totalPenerimaan[$i]->no_penerimaan."</td>
                     <td>".$totalPenerimaan[$i]->tanggal_terima."</td>
-                    <td>".$totalPenerimaan[$i]->komoditas_id."</td>
+                    <td>".$totalPenerimaan[$i]->komoditas_name."</td>
                     <td>".$totalPenerimaan[$i]->kualitas."</td>
-                    <td>".$totalPenerimaan[$i]->kemasan_id."</td>
+                    <td>".$totalPenerimaan[$i]->kemasan_name."</td>
                     <td>".$totalPenerimaan[$i]->koli."</td>
                     <td>".$totalPenerimaan[$i]->bruto."</td>
                     <td>".$totalPenerimaan[$i]->netto."</td>
@@ -128,7 +141,7 @@ class Report extends CI_Controller {
                 $contentTable .= "
                     <td>".$totalPengiriman[$i]->no_penyerahan."</td>
                     <td>".$totalPengiriman[$i]->tanggal_penyerahan."</td>
-                    <td>".$totalPengiriman[$i]->kemasan_id."</td>
+                    <td>".$totalPengiriman[$i]->kemasan_name."</td>
                     <td>".$totalPengiriman[$i]->koli."</td>
                     <td>".$totalPengiriman[$i]->bruto."</td>
                     <td>".$totalPengiriman[$i]->netto."</td>
