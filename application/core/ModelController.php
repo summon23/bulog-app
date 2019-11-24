@@ -32,7 +32,6 @@ abstract class ModelController extends CI_Controller {
         // Check Access    
         $listAccess = $CI->session->userdata('access');
         if (!in_array(strtoupper($options['access']), $listAccess)) {
-            // echo 'NO_ACCESS';die;
             setAlert('warning', 'Anda tidak memiliki Akses');
             redirect('home');
         }

@@ -10,11 +10,18 @@ class Spk extends ModelController {
         'parentmenu' => 'Modules',
         'route' => 'spk',
         'access' => 'SPK',
-        'tablename' => 'app_spk',       
+        'tablename' => 'app_spk',
+        'show_created_by'=> true,
+        'show_created_date'=> true,
         'modelfield' => array(
             'id' => array(
                 'type' => 'hidden',
                 'fieldname' => 'ID'
+            ),
+            'no_spk' => array(
+                'type' => 'text',
+                'fieldname' => 'No Spk',
+                'columnview' => true
             ),
             'tanggal_terima' => array(
                 'type' => 'date',

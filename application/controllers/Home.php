@@ -48,6 +48,19 @@ class Home extends CI_Controller {
 		$params = array();
 
 		$page = 'default/dashboard';
+
+		$totalPenerimaan = $this->db->query('SELECT count(id) as total FROM app_penerimaan')->row();
+		$params['totalpenerimaan'] = $totalPenerimaan;
+
+		$totalPengiriman = $this->db->query('SELECT count(id) as total FROM app_pengiriman')->row();
+		$params['totalpengiriman'] = $totalPengiriman;
+
+		$totalPengolahan = $this->db->query('SELECT count(id) as total FROM app_pengolahan')->row();
+		$params['totalpengolahan'] = $totalPengolahan;
+
+		$totalSpk = $this->db->query('SELECT count(id) as total FROM app_spk')->row();
+		$params['totalspk'] = $totalSpk;
+		
 		return $this->view->genView($page, $params);
 	}
 

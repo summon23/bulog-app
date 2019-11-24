@@ -11,24 +11,13 @@
 										<div class="m-widget24">
 											<div class="m-widget24__item">
 												<h4 class="m-widget24__title">
-													Total Frofit
+													Total SPK
 												</h4><br>
-												<span class="m-widget24__desc">
-													All Customs Value
-												</span>
 												<span class="m-widget24__stats m--font-brand">
-													$18M
+													<?php echo $totalpenerimaan->total;?>
 												</span>
 												<div class="m--space-10"></div>
-												<div class="progress m-progress--sm">
-													<div class="progress-bar m--bg-brand" role="progressbar" style="width: 78%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-												<span class="m-widget24__change">
-													Change
-												</span>
-												<span class="m-widget24__number">
-													78%
-												</span>
+												<br><br>
 											</div>
 										</div>
 
@@ -40,24 +29,13 @@
 										<div class="m-widget24">
 											<div class="m-widget24__item">
 												<h4 class="m-widget24__title">
-													New Feedbacks
+													Total Penerimaan
 												</h4><br>
-												<span class="m-widget24__desc">
-													Customer Review
-												</span>
 												<span class="m-widget24__stats m--font-info">
-													1349
-												</span>
-												<div class="m--space-10"></div>
-												<div class="progress m-progress--sm">
-													<div class="progress-bar m--bg-info" role="progressbar" style="width: 84%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-												<span class="m-widget24__change">
-													Change
-												</span>
-												<span class="m-widget24__number">
-													84%
-												</span>
+													<?php echo $totalpenerimaan->total;?>
+												</span>	
+												<div class="m--space-10"></div>	
+												<br><br>								
 											</div>
 										</div>
 
@@ -69,24 +47,13 @@
 										<div class="m-widget24">
 											<div class="m-widget24__item">
 												<h4 class="m-widget24__title">
-													New Orders
+													Total Pengolahan
 												</h4><br>
-												<span class="m-widget24__desc">
-													Fresh Order Amount
-												</span>
 												<span class="m-widget24__stats m--font-danger">
-													567
+													<?php echo $totalpengolahan->total;?>
 												</span>
 												<div class="m--space-10"></div>
-												<div class="progress m-progress--sm">
-													<div class="progress-bar m--bg-danger" role="progressbar" style="width: 69%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-												<span class="m-widget24__change">
-													Change
-												</span>
-												<span class="m-widget24__number">
-													69%
-												</span>
+												<br><br>
 											</div>
 										</div>
 
@@ -98,24 +65,13 @@
 										<div class="m-widget24">
 											<div class="m-widget24__item">
 												<h4 class="m-widget24__title">
-													New Users
+													Total Pengiriman
 												</h4><br>
-												<span class="m-widget24__desc">
-													Joined New User
-												</span>
 												<span class="m-widget24__stats m--font-success">
-													276
+													<?php echo $totalpengiriman->total;?>
 												</span>
 												<div class="m--space-10"></div>
-												<div class="progress m-progress--sm">
-													<div class="progress-bar m--bg-success" role="progressbar" style="width: 90%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-												</div>
-												<span class="m-widget24__change">
-													Change
-												</span>
-												<span class="m-widget24__number">
-													90%
-												</span>
+												<br><br>
 											</div>
 										</div>
 

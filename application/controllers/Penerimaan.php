@@ -10,7 +10,9 @@ class Penerimaan extends ModelController {
         'parentmenu' => 'Modules',
         'route' => 'penerimaan',
         'access' => 'PENERIMAAN',
-        'tablename' => 'app_penerimaan',       
+        'tablename' => 'app_penerimaan',
+        'show_created_by'=> true,
+        'show_created_date'=> true,
         'modelfield' => array(
             'id' => array(
                 'type' => 'hidden',

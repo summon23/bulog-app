@@ -10,7 +10,9 @@ class Pengolahan extends ModelController {
         'parentmenu' => 'Modules',
         'route' => 'pengolahan',
         'access' => 'PENGOLAHAN',
-        'tablename' => 'app_pengolahan',       
+        'tablename' => 'app_pengolahan',
+        'show_created_by'=> true,
+        'show_created_date'=> true,  
         'modelfield' => array(
             'id' => array(
                 'type' => 'hidden',
@@ -35,8 +37,12 @@ class Pengolahan extends ModelController {
                 'type' => 'text',
                 'fieldname' => 'Netto',
                 'columnview' => true
+            ),
+            'jumlah_terpakai' => array(
+                'type' => 'text',
+                'fieldname' => 'Jumlah Terpakai',
+                'columnview' => true
             )
-
         )
     );
     public function __construct() 
