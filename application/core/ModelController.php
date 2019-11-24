@@ -110,7 +110,10 @@ abstract class ModelController extends CI_Controller {
             if (array_key_exists('reference', $value)) {
                 $ref = $value['reference'];
                 $source = 'name';
-                if (array_key_exists('source_key', $value)) $source = $value['source_key'];
+                // if (array_key_exists('source_key', $value)) $source = $value['source_key'];
+                if (array_key_exists('source_key', $ref)) $source = $ref['source_key'];
+
+                // debug($source);
                 $getValues = $this->db->query('SELECT * from '.$ref['table_name'].' where is_delete = 0 ORDER by '.$source.' ASC')->result_array();
                 $referenceValues[$key] = $getValues;
             }
