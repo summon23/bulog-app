@@ -18,6 +18,17 @@ class Pengolahan extends ModelController {
                 'type' => 'hidden',
                 'fieldname' => 'ID'
             ),
+            'spk_id' => array(
+                'type' => 'dropdown',
+                'fieldname' => 'No SPK',
+                'columnview' => true,
+                'reference' => array(
+                    'table_name' => 'app_spk',
+                    'foreign_key' => 'spk_id',
+                    'alias' => 'spk_no',
+                    'source_key' => 'no_spk'
+                )
+            ),
             'tanggal_pengolahan' => array(
                 'type' => 'date',
                 'fieldname' => 'Tanggal',

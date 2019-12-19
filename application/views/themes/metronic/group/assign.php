@@ -33,7 +33,8 @@
                     <div class="m-portlet__body">
                         <?php 
                         $m = '';
-                        foreach ($access as $key => $value) :
+                        // debug($access);
+                        foreach ($accessrole as $key => $value) :
                             if ($m == '') { $m = $value->menu_name; echo '<br><div class="m-form__group form-group"><label for="" style="font-weight: 500;border-bottom: 1px solid #bdbec3;font-size:15px;">'.$m.'</label></div>'; } ;?>
 
                         <?php 

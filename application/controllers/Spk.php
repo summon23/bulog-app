@@ -28,10 +28,15 @@ class Spk extends ModelController {
                 'fieldname' => 'Tanggal Terima',
                 'columnview' => true
             ),
-            'merk' => array(
-                'type' => 'text',
+            'merk_id' => array(
+                'type' => 'dropdown',
                 'fieldname' => 'Merk',
-                'columnview' => true
+                'columnview' => true,
+                'reference' => array(
+                    'table_name' => 'master_merk',
+                    'foreign_key' => 'merk_id',
+                    'alias' => 'merk_name'
+                )
             ),
             'tujuan' => array(
                 'type' => 'text',
@@ -40,10 +45,13 @@ class Spk extends ModelController {
             ),
             'jumlah' => array(
                 'type' => 'text',
-                'fieldname' => 'Jumlah',
+                'fieldname' => 'Kuantum',
                 'columnview' => true
+            ),
+            'note' => array(
+                'type' => 'textarea',
+                'fieldname' => 'Keterangan'
             )
-
         )
     );
     public function __construct() 

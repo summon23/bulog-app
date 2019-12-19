@@ -66,7 +66,9 @@ class Group extends ModelController {
         $accessGrand = $this->db->query('SELECT * from sys_group_priviledge where user_group_id='.$id)->result();
         $params['modeloptions'] = $this->modelOptions;
         $params['data'] = $dataGroup;
-        $params['access'] = $access;
+
+        // debug($access);
+        $params['accessrole'] = $access;
         $params['accessgrand'] = $accessGrand;
         $params['groupid'] = $id;
         $params['activemenu'] = 'Group';

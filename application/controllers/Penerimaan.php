@@ -23,6 +23,17 @@ class Penerimaan extends ModelController {
                 'fieldname' => 'No Penerimaan',
                 'columnview' => true
             ),
+            'spk_id' => array(
+                'type' => 'dropdown',
+                'fieldname' => 'No SPK',
+                'columnview' => true,
+                'reference' => array(
+                    'table_name' => 'app_spk',
+                    'foreign_key' => 'spk_id',
+                    'alias' => 'spk_no',
+                    'source_key' => 'no_spk'
+                )
+            ),
             'tanggal_terima' => array(
                 'type' => 'date',
                 'fieldname' => 'Tanggal Terima',
@@ -37,7 +48,7 @@ class Penerimaan extends ModelController {
                     'foreign_key' => 'komoditas_id',
                     'alias' => 'komoditi_name'
                 )
-            ),
+            ),           
             'kualitas' => array(
                 'type' => 'text',
                 'fieldname' => 'Kualitas'

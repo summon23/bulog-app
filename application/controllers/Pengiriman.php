@@ -23,6 +23,17 @@ class Pengiriman extends ModelController {
                 'fieldname' => 'No Penyerahan',
                 'columnview' => true
             ),
+            'spk_id' => array(
+                'type' => 'dropdown',
+                'fieldname' => 'No SPK',
+                'columnview' => true,
+                'reference' => array(
+                    'table_name' => 'app_spk',
+                    'foreign_key' => 'spk_id',
+                    'alias' => 'spk_no',
+                    'source_key' => 'no_spk'
+                )
+            ),
             'tanggal_penyerahan' => array(
                 'type' => 'date',
                 'fieldname' => 'Tanggal Penyerahan',

@@ -49,7 +49,7 @@
                                 case 'date':?>
                                  <div class="form-group m-form__group">
                                      <label for="m-datepicker-<?php echo $key;?>"><?php echo $value['fieldname'];?></label>
-                                     <input type="text" class="form-control" id="m-datepicker-<?php echo $key;?>" name="<?php echo $key;?>" readonly placeholder="Select date" />
+                                     <input type="text" value="<?php echo date('d-m-Y');?>" class="form-control" id="m-datepicker-<?php echo $key;?>" name="<?php echo $key;?>" readonly placeholder="Select date" />
                                  </div>
                                  <script type="text/javascript">
                                      $(document).ready(function() {
