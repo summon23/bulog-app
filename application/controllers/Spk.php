@@ -75,4 +75,24 @@ class Spk extends ModelController {
         $id = $payload['id'];
         return $payload;
     }
+
+    public function apispk($spkId) {
+        $data = $this->db->query('SELECT * from 
+        app_spk JOIN master_merk m ON m.id = app_spk.merk_id
+        WHERE app_spk.id = '.$spkId)->row();
+
+        $response = array(
+            'data' => null,
+            'message' => 'SPK_DETAIL'
+        );
+
+        if (!empty($data)) {
+            $response = array(
+                'data' => $data,
+                'message' => 'SPK_DETAIL'
+            );
+        }
+
+        echo json_encode($response);
+    }
 }

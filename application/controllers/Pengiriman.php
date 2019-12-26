@@ -20,7 +20,7 @@ class Pengiriman extends ModelController {
             ),
             'no_penyerahan' => array(
                 'type' => 'text',
-                'fieldname' => 'No Penyerahan',
+                'fieldname' => 'No DO',
                 'columnview' => true
             ),
             'spk_id' => array(
@@ -39,27 +39,13 @@ class Pengiriman extends ModelController {
                 'fieldname' => 'Tanggal Penyerahan',
                 'columnview' => true
             ),
-            'kemasan_id' => array(
-                'type' => 'dropdown',
-                'fieldname' => 'Kemasan',
-                'columnview' => true,
-                'reference' => array(
-                    'table_name' => 'master_kemasan',
-                    'foreign_key' => 'kemasan_id',
-                    'alias' => 'kemasan_name'
-                )
-            ),
-            'koli' => array(
+            'kuantum' => array(
                 'type' => 'text',
-                'fieldname' => 'Koli'
+                'fieldname' => 'Kuantum'
             ),
-            'bruto' => array(
+            'jumlah_kemasan' => array(
                 'type' => 'text',
-                'fieldname' => 'Bruto'
-            ),
-            'netto' => array(
-                'type' => 'text',
-                'fieldname' => 'Netto'
+                'fieldname' => 'Jumlah Kemasan'
             ),
             'penerima' => array(
                 'type' => 'text',

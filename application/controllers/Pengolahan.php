@@ -34,24 +34,24 @@ class Pengolahan extends ModelController {
                 'fieldname' => 'Tanggal',
                 'columnview' => true
             ),
-            'jumlah_koli' => array(
+            'kuantum_hasil_kemasan' => array(
                 'type' => 'text',
-                'fieldname' => 'Jumlah Koli',
+                'fieldname' => 'Kuantum Hasil Kemasan',
                 'columnview' => true
             ),
-            'bruto' => array(
+            'kemasan_rusak' => array(
                 'type' => 'text',
-                'fieldname' => 'Bruto',
+                'fieldname' => 'Kemasan Rusak',
                 'columnview' => true
             ),
-            'netto' => array(
+            'susut' => array(
                 'type' => 'text',
-                'fieldname' => 'Netto',
+                'fieldname' => 'Susut',
                 'columnview' => true
             ),
-            'jumlah_terpakai' => array(
+            'note' => array(
                 'type' => 'text',
-                'fieldname' => 'Jumlah Terpakai',
+                'fieldname' => 'Keterangan',
                 'columnview' => true
             )
         )

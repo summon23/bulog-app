@@ -34,7 +34,186 @@ class Report extends CI_Controller {
         $startDate = date('Y-m-d', strtotime($startDate));
         $endDate = date('Y-m-d', strtotime($endDate));
 
-        $totalSpk = $this->db->query('SELECT * FROM app_spk WHERE DATE(created_date) BETWEEN "'.$startDate.'" AND "'.$endDate.'" ')->result();     
+        $totalSpk = $this->db->query('SELECT app_spk.*, m.name as merk_name FROM app_spk 
+        JOIN master_merk m ON m.id = app_spk.merk_id
+        WHERE DATE(app_spk.created_date) BETWEEN "'.$startDate.'" AND "'.$endDate.'" ')->result();     
+
+        $totalPenerimaan = $this->db->query('SELECT app_penerimaan.*, mk.name as komoditas_name, mkm.name as kemasan_name
+            FROM app_penerimaan      
+            JOIN master_komoditi mk ON mk.id = app_penerimaan.komoditas_id       
+            JOIN master_kemasan mkm ON mkm.id = app_penerimaan.kemasan_id
+            WHERE DATE(app_penerimaan.created_date) BETWEEN "'.$startDate.'" AND "'.$endDate.'" ')->result();
+
+        
+        $totalPengiriman = $this->db->query('SELECT app_pengiriman.*
+            FROM app_pengiriman
+            WHERE DATE(app_pengiriman.created_date) BETWEEN "'.$startDate.'" AND "'.$endDate.'" ')->result();
+
+
+        $totalPengolahan = $this->db->query('SELECT * 
+            FROM app_pengolahan 
+            WHERE DATE(created_date) BETWEEN "'.$startDate.'" AND "'.$endDate.'" ')->result();
+            
+        
+        $countTotalPenerimaan = count($totalPenerimaan);
+        $countTotalPengiriman = count($totalPengiriman);
+        $countTotalPengolahan = count($totalPengolahan);
+        $countTotalSpk = count($totalSpk);
+
+        // debug($totalSpk);
+        
+        $contentTable = '';
+
+        $i = 0;
+        while ($i < $countTotalPenerimaan 
+            && $i < $countTotalPengiriman 
+            && $i < $countTotalPengolahan
+            && $i < $countTotalSpk
+        ) {
+            $contentTable .= '<tr>';
+
+            // spk
+            if (isset($totalSpk[$i])) {
+                $contentTable .= "
+                    <td>".$totalSpk[$i]->no_spk."</td>
+                    <td>".$totalSpk[$i]->tanggal_terima."</td>
+                    <td>".$totalSpk[$i]->merk_name."</td>
+                    <td>".$totalSpk[$i]->tujuan."</td>
+                    <td>".$totalSpk[$i]->jumlah."</td>
+                ";
+            } else {
+                $contentTable .= "
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            ";
+            }
+
+            // penerimaan
+            if (isset($totalPenerimaan[$i])) {
+                $contentTable .= "
+                    <td>".$totalPenerimaan[$i]->no_penerimaan."</td>
+                    <td>".$totalPenerimaan[$i]->tanggal_terima."</td>
+                    <td>".$totalPenerimaan[$i]->komoditas_name."</td>
+                    <td> - </td>
+                    <td>".$totalPenerimaan[$i]->kemasan_name."</td>
+                    <td>".$totalPenerimaan[$i]->pengirim."</td>
+                ";
+            } else {
+                $contentTable .= "
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                ";
+            }
+
+            // pengolahan
+            if (isset($totalPengolahan[$i])) {
+                $contentTable .= "
+                    <td>".$totalPengolahan[$i]->tanggal_pengolahan."</td>
+                    <td>".$totalPengolahan[$i]->kuantum_hasil_kemasan."</td>
+                    <td>".$totalPengolahan[$i]->jumlah_kemasan_terpakai."</td>
+                ";
+            } else {
+                $contentTable .= "
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                ";
+            }
+            
+            // pengiriman
+            if (isset($totalPengiriman[$i])) {
+                $contentTable .= "                    
+                    <td>".$totalPengiriman[$i]->tanggal_penyerahan."</td>
+                    <td>".$totalPengiriman[$i]->no_penyerahan."</td>
+                    <td>".$totalPengiriman[$i]->kuantum."</td>
+                    <td>".$totalPengiriman[$i]->penerima."</td>
+                    <td>".$totalPengiriman[$i]->keterangan."</td>
+                ";
+            } else {
+                $contentTable .= "
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                ";
+            }
+
+            $contentTable .= '</tr>';
+
+            $i++;
+        }
+        
+        $html = '<html>
+        <head>
+        <meta charset="utf-8">
+        </head>
+        <table border="1">
+            <tr>
+                <th colspan="5">SPK</th>
+                <th colspan="6">PENERIMAAN KOMODITAS</th>
+                <th colspan="3">PENGOLAHAN</th>
+                <th colspan="5">PENYERAHAN</th>
+            </tr>
+            <tr>
+                <th>NO SPK</th>
+                <th>TGL TERIMA SPK</th>
+                <th>MERK</th>
+                <th>TUJUAN</th>
+                <th>JUMLAH (KG)</th>
+                
+                <th>NO PENERIMAAN</th>
+                <th>TGL TERIMA KOMODITAS</th>
+                <th>KOMODITAS</th>
+                <th>KUALITAS</th>
+                <th>KUANTUM</th>
+                <th>PENGIRIM</th>
+
+                <th>TGL PENGOLAHAN</th>
+                <th>KUANTUM</th>
+                <th>JUMLAH KEMASAN TERPAKAI</th>
+
+                <th>TGL PENYERAHAN</th>
+                <th>NO PENYERAHAN</th>
+                <th>KUANTUM</th>
+                <th>PENERIMA</th>
+                <th>KETERANGAN</th>
+            </tr>
+            '.$contentTable.'
+        </table></html>';
+        
+        // Start Generete Excel File
+        header("Content-type: application/excel");
+        header("Content-Disposition: attachment; filename=REPORTSYSTEM.xls");
+        echo $html;
+
+        // die;
+
+        // $excel = $this->excel->getContext();
+
+		// $excel->setActiveSheetIndex(0);
+        // $excel->getActiveSheet()->setTitle('Report System');
+
+        return true;
+        
+    }
+    
+
+    public function generateBarangBackup() {
+        $startDate = $this->input->post('startdate');
+        $endDate = $this->input->post('enddate');
+
+        $startDate = date('Y-m-d', strtotime($startDate));
+        $endDate = date('Y-m-d', strtotime($endDate));
+
+        $totalSpk = $this->db->query('SELECT * FROM app_spk WHERE DATE(created_date) BETWEEN "'.$startDate.'" AND "'.$endDate.'" ')->result();         
         $totalPenerimaan = $this->db->query('SELECT app_penerimaan.*, m.name as komoditas_name, mm.name as kemasan_name
             FROM app_penerimaan 
             JOIN master_komoditi m ON m.id = app_penerimaan.komoditas_id

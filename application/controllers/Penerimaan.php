@@ -39,6 +39,10 @@ class Penerimaan extends ModelController {
                 'fieldname' => 'Tanggal Terima',
                 'columnview' => true
             ),
+            'tanggal_terima_spk' => array(
+                'type' => 'date',
+                'fieldname' => 'Tanggal Terima SPK'
+            ),
             'komoditas_id' => array(
                 'type' => 'dropdown',
                 'fieldname' => 'Komoditas',
@@ -49,9 +53,9 @@ class Penerimaan extends ModelController {
                     'alias' => 'komoditi_name'
                 )
             ),           
-            'kualitas' => array(
+            'jumlah' => array(
                 'type' => 'text',
-                'fieldname' => 'Kualitas'
+                'fieldname' => 'Jumlah'
             ),
             'kemasan_id' => array(
                 'type' => 'dropdown',
@@ -63,27 +67,9 @@ class Penerimaan extends ModelController {
                     'alias' => 'kemasan_name'
                 )
             ),
-            'koli' => array(
+            'gudang_asal' => array(
                 'type' => 'text',
-                'fieldname' => 'Koli'
-            ),
-            'bruto' => array(
-                'type' => 'text',
-                'fieldname' => 'Bruto'
-            ),
-            'netto' => array(
-                'type' => 'text',
-                'fieldname' => 'Netto'
-            ),
-            'jumlah_terpakai' => array(
-                'type' => 'text',
-                'fieldname' => 'Jumlah Terpakai',
-                'columnview' => true
-            ),
-            'pengirim' => array(
-                'type' => 'text',
-                'fieldname' => 'Pengirim',
-                'columnview' => true
+                'fieldname' => 'Gudang Asal'
             )
 
         )
@@ -97,6 +83,7 @@ class Penerimaan extends ModelController {
         // Check existing
         $name = strtolower($payload['name']);
         $payload['tanggal_terima'] = date('Y-m-d', strtotime($payload['tanggal_terima']));
+        $payload['tanggal_terima_spk'] = date('Y-m-d', strtotime($payload['tanggal_terima_spk']));
 
         return $payload;
     }
@@ -105,6 +92,7 @@ class Penerimaan extends ModelController {
         // Check existing
         $name = strtolower($payload['name']);
         $payload['tanggal_terima'] = date('Y-m-d', strtotime($payload['tanggal_terima']));
+        $payload['tanggal_terima_spk'] = date('Y-m-d', strtotime($payload['tanggal_terima_spk']));
 
         $id = $payload['id'];
         return $payload;

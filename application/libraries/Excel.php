@@ -27,4 +27,13 @@ class Excel {
 		//force user to download the Excel file without writing it to server's HD
 		$objWriter->save('php://output');
     }
+
+    public function writeExcelFromHTML($excel, $htmlDocument = '')
+    {
+        $objPHPExcelReader = PHPExcel_IOFactory::createReader('HTML');
+        $objPHPExcel = $objPHPExcelReader->load($htmlDocument);
+        
+        $objPHPExcelWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+        $objPHPExcelWriter->save('php://output');
+    }
 }
